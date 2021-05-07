@@ -27,7 +27,7 @@ function [X, f, t] = stft(x,w,d,N_fft,Fs)
     end
     
     %testing
-    X = x_frame;
-    f = zeros(10);
-    t = zeros(10);
+    X = fft(x_frame, N_fft);
+    f = 0:Fs/N_fft:Fs-Fs/N_fft;
+    t = 0:1/Fs:(length(x)-1)*1/Fs;
 end
