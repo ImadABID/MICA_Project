@@ -1,0 +1,33 @@
+function [X, f, t] = stft(x,w,d,N_fft,Fs)
+% This function computes the stft for m = [0, d, 2d, 3d...]
+% This function outputs are:
+% -> X, which is a matrix of n_fft lines and M columns
+% M is the number of elements of m
+% X(i,j) is the value of the spectrogram for time t(i) and frequency f(j)
+% -> f, is a column vector of the frequencies (in Hz)
+% -> t, is a row vector containing the times of the beginning of the windows
+
+    N = length(w);
+    nbr_frames = floor(length(x) / d);
+    
+    %adapting x
+    if(length(x) ~= d*nbr_frames)
+        x = [x, zeros(1, N*nbr_frames-length(x))];
+    end
+    
+    %framing
+    x_frame = zeros(N, nbr_frames);
+    for i = 1:1:nbr_frames
+        x_frame(:,i)= transpose(x((i-1)*d+1:1:(i-1)*d+N));
+    end
+    
+    %Multipalying by the window
+    for i=1:1:nbr_frames
+        x_frame(:,i) = x_frame(:,i) .* w;
+    end
+    
+    %testing
+    X = x_frame;
+    f = zeros(10);
+    t = zeros(10);
+end
