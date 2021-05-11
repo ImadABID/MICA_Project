@@ -12,4 +12,5 @@ function [Sx, f, t] = spectro(x,w,d,N_fft,Fs)
     
     figure,
     imagesc(t, f, 10*log(Sx))
+    colorbar
 end
