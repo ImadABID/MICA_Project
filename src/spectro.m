@@ -7,6 +7,9 @@ function [Sx, f, t] = spectro(x,w,d,N_fft,Fs)
     % -> f, is a column vector of the frequencies (in Hz)
     % -> t, is a row vector containing the times of the beginning of the windows
     
-    [X, f, t] = stft([1 2 3 4 5],rectwin(4),2,1028,10e3);
+    [X, f, t] = stft(x,w,d,N_fft,Fs);
     Sx = abs(X) .^ 2;
+    
+    figure,
+    imagesc(t, f, 10*log(Sx))
 end
