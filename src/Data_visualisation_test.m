@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 
-Sig = load("../data/ecg_SSS.mat");
+Sig = load("../data/ecg_normal_1.mat");
 
 % Adapting ECG polarisation
 [max, max_index] = max(abs(Sig.ecg));
