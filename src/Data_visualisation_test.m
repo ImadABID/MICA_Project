@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 
-Sig = load("../data/ecg_normal_1.mat");
+Sig = load("../data/ecg_SSS.mat");
 
 
 
