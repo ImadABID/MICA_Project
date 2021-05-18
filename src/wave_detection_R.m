@@ -18,41 +18,59 @@ y_final=filter(coeff_nume_haut,coeff_denom_haut,y_bas);
 y_final = y_final(20:1:length(y_final));
 y_derivated= filter([1,2,0,-2,-1],[1],y_final).*(1/(8*Ts));
 
-Ssq = abs(y_derivated(10:1:length(y_derivated))).^2;
+S_sq = abs(y_derivated(10:1:length(y_derivated))).^2;
+S_mwi = moving_window_intergration(S_sq,window_length);
+thresholding_step = thresholding(S_mwi);
 
 R_locations = zeros(1,100);
 
 figure,
-nb_values = 200;
+nb_values = 6000;
+nbr_figures = 6;
 
 %time_ecg = linspace(1,Ts,X);
 
 subplot(5,1,1);
-
-%plot(time_ecg,ECG);
 plot(ECG(1:nb_values));
 title('ECG');
+xlabel("time")
+ylabel("ECG en mV")
 grid on ;
 
-subplot(5,1,2);
+subplot(nbr_figures,1,2);
 plot(y_final(1:nb_values));
-title('ECG pass bande');
+title('ECG after band-pass filtre');
+xlabel("time")
+ylabel("magnitude")
 grid on ;
-subplot(5,1,3);
+
+subplot(nbr_figures,1,3);
 plot(y_derivated(10:nb_values));
 title('ECG Derivated');
+xlabel("time")
+ylabel("magnitude")
 grid on;
-subplot(5,1,4);
-plot(Ssq(1:nb_values));
+
+subplot(nbr_figures,1,4);
+plot(S_sq(1:nb_values));
 title('ECG module carre');
+xlabel("time")
+ylabel("magnitude")
 grid on;
-subplot(5,1,5);
-grid on ;
-X = moving_window_intergration(Ssq,window_length);
-plot(X(1:nb_values));
-title('ECG MVI');
+
+subplot(nbr_figures,1,5);
+plot(S_mwi(1:nb_values));
+title('ECG MWI');
+xlabel("time")
+ylabel("magnitude")
 grid on ;
 
+subplot(nbr_figures,1,6);
+plot(thresholding_step(1:nb_values));
+title("After thresholding");
+xlabel("time")
+ylabel("magnitude")
+grid on ;
 
 end
 
