@@ -1,13 +1,17 @@
-Sig = load("../data/ecg_normal_1.mat");
-
 clc;
 clear all;
 close all;
 
+Sig = load("../data/ecg_normal_1.mat");
+
+
+
+Sig.ecg = -Sig.ecg;
+
 
 N_fft = 1024;
 N = 100;
-d = 10;
+d = 60;
 window = hann(N);
 
 spectro(Sig.ecg, window,d,N_fft,Sig.Fs);
