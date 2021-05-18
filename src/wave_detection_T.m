@@ -1,5 +1,6 @@
 function T_locations = wave_detection_T(sig, R_locations)
     T_locations = zeros(1, length(R_locations) - 1);
+    P_locations = zeros(1, length(R_locations) - 1);
     for i = 1:1:length(R_locations)-1
         ir1 = R_locations(i);
         ir2 = R_locations(i+1);
