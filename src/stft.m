@@ -8,11 +8,12 @@ function [X, f, t] = stft(x,w,d,N_fft,Fs)
 % -> t, is a row vector containing the times of the beginning of the windows
 
     N = length(w);
-    nbr_frames = floor(length(x) / d);
+    nbr_frames = floor(length(x) / d) + 1;
     
     %adapting x
-    if(length(x) ~= d*nbr_frames)
-        x = [x, zeros(1, N*nbr_frames-length(x))];
+    ideal_length_of_x = (nbr_frames-1)*d + N;
+    if(length(x) ~= ideal_length_of_x)
+        x = [x, zeros(1, ideal_length_of_x-length(x))];
     end
     
     %framing

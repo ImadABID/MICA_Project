@@ -1,4 +1,4 @@
-Sig = load("../data/ecg_VF.mat");
+Sig = load("../data/ecg_normal_1.mat");
 
 N_fft = 1024;
 N = 100;
