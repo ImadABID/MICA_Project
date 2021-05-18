@@ -15,8 +15,10 @@ coeff_nume_haut(1,33)=1;
 coeff_denom_haut =[1,-1];
 
 y_final=filter(coeff_nume_haut,coeff_denom_haut,y_bas);
-y_final = y_final(20:1:length(y_final));
+retard_pass_bande = 20;
+y_final = y_final(retard_pass_bande:1:length(y_final));
 y_derivated= filter([1,2,0,-2,-1],[1],y_final).*(1/(8*Ts));
+retard_derivation = 10;
 
 S_sq = abs(y_derivated(10:1:length(y_derivated))).^2;
 S_mwi = moving_window_intergration(S_sq,window_length);
