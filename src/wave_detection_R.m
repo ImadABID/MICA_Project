@@ -1,4 +1,4 @@
-function [R_locations] = wave_detection_R(ECG,Ts,nb_values,window_length)
+function [R_locations] = wave_detection_R(ECG,Ts,window_length)
 
 coeff_nume_bas = conv([1 0 0 0 0 0 -1],[1 0 0 0 0 0 -1]); %les coefficients du numérateur de la transformeé en z du filter passe_bas
 coeff_denom_bas = [1 -2 1];
@@ -25,7 +25,7 @@ Ssq = abs(y_derivated(retard_derivation:1:length(y_derivated))).^2;
 R_locations = zeros(1,100);
 
 figure,
-
+nb_values = 200;
 
 %time_ecg = linspace(1,Ts,X);
 
