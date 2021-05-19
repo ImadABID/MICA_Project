@@ -20,5 +20,5 @@ window = hann(N);
 
 
 [Q_locs, R_locs, S_locs] = wave_detection_QRS(Sig.ecg,1/(Sig.Fs), 2);
-T_locs = wave_detection_T(Sig.ecg,[1 100 200 300 600 900]);
+%T_locs = wave_detection_T(Sig.ecg,R_locs);
 

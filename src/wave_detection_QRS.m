@@ -45,6 +45,7 @@ thresholding_step = thresholding(S_mwi);
 R_locations = detecting_picks(sig_band_pass, thresholding_step);
 Q_locations = wave_detection_Q(sig_band_pass, R_locations);
 S_locations = wave_detection_S(sig_band_pass, R_locations);
+T_locations = wave_detection_T(ECG, R_locations);
 
 %% Ploting steps
 figure,
@@ -104,6 +105,10 @@ hold on
 plot(Q_locations(1:1:R_locations_disp_len), sig_band_pass(Q_locations(1:1:R_locations_disp_len)), '.')
 hold on
 plot(S_locations(1:1:R_locations_disp_len), sig_band_pass(S_locations(1:1:R_locations_disp_len)), '.')
+hold on
+plot(T_locations(1:1:R_locations_disp_len), sig_band_pass(T_locations(1:1:R_locations_disp_len)), '.')
+hold on
+plot(ECG(1:1:nb_values))
 title("QRS locations");
 grid on;
 legend('ECG filtred', 'R locations', 'Q locations', 'S locations')
