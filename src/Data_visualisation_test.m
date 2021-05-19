@@ -19,6 +19,6 @@ window = hann(N);
 %spectro(Sig.ecg, window,d,N_fft,Sig.Fs);
 
 
-R_locs = wave_detection_R(Sig.ecg,1/(Sig.Fs), 2);
+[Q_locs, R_locs, S_locs] = wave_detection_QRS(Sig.ecg,1/(Sig.Fs), 2);
 T_locs = wave_detection_T(Sig.ecg,[1 100 200 300 600 900]);
 
