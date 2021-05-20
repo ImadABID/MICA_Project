@@ -1,4 +1,4 @@
-function [Q_locations, R_locations, S_locations] = wave_detection_QRS(ECG,Ts,window_length)
+function [P_locations, Q_locations, R_locations, S_locations, T_locations] = wave_detection_PQRST(ECG,Ts,window_length)
 
 %% Passe bas
 coeff_nume_bas = conv([1 0 0 0 0 0 -1],[1 0 0 0 0 0 -1]); %les coefficients du numérateur de la transformeé en z du filter passe_bas
@@ -45,7 +45,7 @@ thresholding_step = thresholding(S_mwi);
 R_locations = detecting_picks(sig_band_pass, thresholding_step);
 Q_locations = wave_detection_Q(sig_band_pass, R_locations);
 S_locations = wave_detection_S(sig_band_pass, R_locations);
-T_locations = wave_detection_T(ECG, R_locations);
+[T_locations, P_locations] = wave_detection_PT(ECG, R_locations);
 
 %% Ploting steps
 figure,
@@ -104,7 +104,9 @@ hold on
 plot(S_locations, sig_band_pass(S_locations), '.')
 hold on
 plot(T_locations, sig_band_pass(T_locations), '.')
+hold on
+plot(P_locations, sig_band_pass(P_locations), '.')
 title('PRQST locations')
-legend('ECG filtred', 'R locations', 'Q locations', 'S locations', 'S locations');
+legend('ECG filtred', 'R locations', 'Q locations', 'S locations', 'S locations', 'P locations');
 grid on;
 end
