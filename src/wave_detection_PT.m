@@ -32,7 +32,7 @@ function [T_locations, P_locations] = wave_detection_PT(ECG, R_locations)
     T_locations = T_locations - 2;
     
     %% P Detection
-    P_locations = []
+    P_locations = [];
     for i = 1:1:(length(R_locations)-2)
         zero_loc = [];
         lim = floor((R_locations(i+1) - R_locations(i))*0.7);
