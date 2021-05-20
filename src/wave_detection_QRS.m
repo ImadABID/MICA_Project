@@ -49,46 +49,45 @@ T_locations = wave_detection_T(ECG, R_locations);
 
 %% Ploting steps
 figure,
-nb_values = 1000;
 nbr_figures = 6;
 
 subplot(nbr_figures,1,1);
-plot(ECG(1:nb_values));
+plot(ECG);
 title('ECG');
 xlabel("time")
 ylabel("ECG en mV")
 grid on ;
 
 subplot(nbr_figures,1,2);
-plot(sig_band_pass(1:nb_values));
+plot(sig_band_pass);
 title('ECG after band-pass filtre');
 xlabel("time")
 ylabel("magnitude")
 grid on ;
 
 subplot(nbr_figures,1,3);
-plot(y_derivated(1:nb_values));
+plot(y_derivated);
 title('ECG Derivated');
 xlabel("time")
 ylabel("magnitude")
 grid on;
 
 subplot(nbr_figures,1,4);
-plot(S_sq(1:nb_values));
+plot(S_sq);
 title('ECG module carre');
 xlabel("time")
 ylabel("magnitude")
 grid on;
 
 subplot(nbr_figures,1,5);
-plot(S_mwi(1:nb_values));
+plot(S_mwi);
 title('ECG MWI');
 xlabel("time")
 ylabel("magnitude")
 grid on ;
 
 subplot(nbr_figures,1,6);
-plot(thresholding_step(1:nb_values));
+plot(thresholding_step);
 title("After thresholding");
 xlabel("time")
 ylabel("magnitude")
@@ -96,20 +95,16 @@ grid on ;
 
 %% Ploting R locations
 figure
-plot(sig_band_pass(1:1:nb_values))
+plot(sig_band_pass)
 hold on
-[max_val, R_locations_disp_len] = max(R_locations - nb_values > 0);
-R_locations_disp_len = R_locations_disp_len-1;
-plot(R_locations(1:1:R_locations_disp_len), sig_band_pass(R_locations(1:1:R_locations_disp_len)), '.')
+plot(R_locations, sig_band_pass(R_locations), '.')
 hold on
-plot(Q_locations(1:1:R_locations_disp_len), sig_band_pass(Q_locations(1:1:R_locations_disp_len)), '.')
+plot(Q_locations, sig_band_pass(Q_locations), '.')
 hold on
-plot(S_locations(1:1:R_locations_disp_len), sig_band_pass(S_locations(1:1:R_locations_disp_len)), '.')
+plot(S_locations, sig_band_pass(S_locations), '.')
 hold on
-plot(T_locations(1:1:R_locations_disp_len), sig_band_pass(T_locations(1:1:R_locations_disp_len)), '.')
-hold on
-plot(ECG(1:1:nb_values))
-title("QRS locations");
+plot(T_locations, sig_band_pass(T_locations), '.')
+title('PRQST locations')
+legend('ECG filtred', 'R locations', 'Q locations', 'S locations', 'S locations');
 grid on;
-legend('ECG filtred', 'R locations', 'Q locations', 'S locations')
 end
