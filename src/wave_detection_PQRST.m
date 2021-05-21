@@ -111,4 +111,5 @@ if(strcmp(plot_locations_opt,'plot'))
     legend('ECG filtred', 'R locations', 'Q locations', 'S locations', 'S locations', 'P locations');
     grid on;
 end
+
 end

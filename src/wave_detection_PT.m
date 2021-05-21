@@ -29,7 +29,7 @@ function [T_locations, P_locations] = wave_detection_PT(ECG, R_locations, plot_l
         [maxx , T]= max(ECG(zero_loc));
         T_locations = [T_locations, zero_loc(T)];
     end
-    T_locations = T_locations - 2;
+    T_locations = T_locations -2 ;
     
     %% P Detection
     P_locations = [];
@@ -46,7 +46,7 @@ function [T_locations, P_locations] = wave_detection_PT(ECG, R_locations, plot_l
         [maxx , P]= max(ECG(zero_loc));
         P_locations = [P_locations, zero_loc(P)];
     end
-    P_locations = P_locations - 2;
+    P_locations = P_locations -2;
     
     if(strcmp(plot_locations_opt,'plot'))
         %% Ploting steps
