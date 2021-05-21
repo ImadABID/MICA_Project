@@ -1,4 +1,4 @@
-function [P_locations, Q_locations, R_locations, S_locations, T_locations] = wave_detection_PQRST(ECG,Ts,window_length)
+function [P_locations, Q_locations, R_locations, S_locations, T_locations] = wave_detection_PQRST(ECG,Ts,window_length, plot_locations_opt)
 
 %% Passe bas
 coeff_nume_bas = conv([1 0 0 0 0 0 -1],[1 0 0 0 0 0 -1]); %les coefficients du numérateur de la transformeé en z du filter passe_bas
@@ -38,76 +38,78 @@ S_mwi = moving_window_intergration(S_sq,window_length);
 %% Thresholding
 thresholding_step = thresholding(S_mwi);
 
-%% Detecting R
+%% Detecting PQRST
 %fprintf("length(thresholding_step) : %d\n", length(thresholding_step));
 %fprintf("length(sig_band_pass) : %d\n", length(sig_band_pass));
 
 R_locations = detecting_picks(sig_band_pass, thresholding_step);
 Q_locations = wave_detection_Q(sig_band_pass, R_locations);
 S_locations = wave_detection_S(sig_band_pass, R_locations);
-[T_locations, P_locations] = wave_detection_PT(ECG, R_locations);
+[T_locations, P_locations] = wave_detection_PT(ECG, R_locations, plot_locations_opt);
 
-%% Ploting steps
-figure,
-nbr_figures = 6;
+%% Ploting
+if(strcmp(plot_locations_opt,'plot'))
+    %% Ploting steps
+    figure,
+    nbr_figures = 6;
 
-subplot(nbr_figures,1,1);
-plot(ECG);
-title('ECG');
-xlabel("time")
-ylabel("ECG en mV")
-grid on ;
+    subplot(nbr_figures,1,1);
+    plot(ECG);
+    title('ECG');
+    xlabel("time")
+    ylabel("ECG en mV")
+    grid on ;
 
-subplot(nbr_figures,1,2);
-plot(sig_band_pass);
-title('ECG after band-pass filtre');
-xlabel("time")
-ylabel("magnitude")
-grid on ;
+    subplot(nbr_figures,1,2);
+    plot(sig_band_pass);
+    title('ECG after band-pass filtre');
+    xlabel("time")
+    ylabel("magnitude")
+    grid on ;
 
-subplot(nbr_figures,1,3);
-plot(y_derivated);
-title('ECG Derivated');
-xlabel("time")
-ylabel("magnitude")
-grid on;
+    subplot(nbr_figures,1,3);
+    plot(y_derivated);
+    title('ECG Derivated');
+    xlabel("time")
+    ylabel("magnitude")
+    grid on;
 
-subplot(nbr_figures,1,4);
-plot(S_sq);
-title('ECG module carre');
-xlabel("time")
-ylabel("magnitude")
-grid on;
+    subplot(nbr_figures,1,4);
+    plot(S_sq);
+    title('ECG module carre');
+    xlabel("time")
+    ylabel("magnitude")
+    grid on;
 
-subplot(nbr_figures,1,5);
-plot(S_mwi);
-title('ECG MWI');
-xlabel("time")
-ylabel("magnitude")
-grid on ;
+    subplot(nbr_figures,1,5);
+    plot(S_mwi);
+    title('ECG MWI');
+    xlabel("time")
+    ylabel("magnitude")
+    grid on ;
 
-subplot(nbr_figures,1,6);
-plot(thresholding_step);
-title("After thresholding");
-xlabel("time")
-ylabel("magnitude")
-grid on ;
+    subplot(nbr_figures,1,6);
+    plot(thresholding_step);
+    title("After thresholding");
+    xlabel("time")
+    ylabel("magnitude")
+    grid on ;
+    %% Ploting R locations
+    figure
+    plot(sig_band_pass)
+    hold on
+    plot(R_locations, sig_band_pass(R_locations), '.')
+    hold on
+    plot(Q_locations, sig_band_pass(Q_locations), '.')
+    hold on
+    plot(S_locations, sig_band_pass(S_locations), '.')
+    hold on
+    plot(T_locations, sig_band_pass(T_locations), '.')
+    hold on
+    plot(P_locations, sig_band_pass(P_locations), '.')
+    title('PRQST locations')
+    legend('ECG filtred', 'R locations', 'Q locations', 'S locations', 'S locations', 'P locations');
+    grid on;
+end
 
-%% Ploting R locations
-figure
-plot(sig_band_pass)
-hold on
-plot(R_locations, sig_band_pass(R_locations), '.')
-%hold on
-%plot(Q_locations, sig_band_pass(Q_locations), '.')
-%hold on
-%plot(S_locations, sig_band_pass(S_locations), '.')
-%hold on
-%plot(T_locations, sig_band_pass(T_locations), '.')
-%hold on
-%plot(P_locations, sig_band_pass(P_locations), '.')
-title('PRQST locations')
-%legend('ECG filtred', 'R locations', 'Q locations', 'S locations', 'T locations', 'P locations');
-%legend('ECG filtred','T locations', 'P locations');
-grid on;
 end
