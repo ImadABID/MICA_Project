@@ -98,15 +98,16 @@ figure
 plot(sig_band_pass)
 hold on
 plot(R_locations, sig_band_pass(R_locations), '.')
-hold on
-plot(Q_locations, sig_band_pass(Q_locations), '.')
-hold on
-plot(S_locations, sig_band_pass(S_locations), '.')
-hold on
-plot(T_locations, sig_band_pass(T_locations), '.')
-hold on
-plot(P_locations, sig_band_pass(P_locations), '.')
+%hold on
+%plot(Q_locations, sig_band_pass(Q_locations), '.')
+%hold on
+%plot(S_locations, sig_band_pass(S_locations), '.')
+%hold on
+%plot(T_locations, sig_band_pass(T_locations), '.')
+%hold on
+%plot(P_locations, sig_band_pass(P_locations), '.')
 title('PRQST locations')
-legend('ECG filtred', 'R locations', 'Q locations', 'S locations', 'S locations', 'P locations');
+%legend('ECG filtred', 'R locations', 'Q locations', 'S locations', 'T locations', 'P locations');
+%legend('ECG filtred','T locations', 'P locations');
 grid on;
 end
