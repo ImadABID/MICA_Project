@@ -25,7 +25,10 @@ N = window_duration * Sig1.Fs;
 d = floor(N/2);
 window = hann(N);
 
-spectro(Sig1.ecg, window,d,N_fft,Sig1.Fs, "Noramal_1");
-spectro(Sig2.ecg, window,d,N_fft,Sig2.Fs, "VF");
+%spectro(Sig1.ecg, window,d,N_fft,Sig1.Fs, "Noramal_1");
+%spectro(Sig2.ecg, window,d,N_fft,Sig2.Fs, "VF");
 
 %[P_locs, Q_locs, R_locs, S_locs, T_locs] = wave_detection_PQRST(Sig.ecg(1:1:1200),1/(Sig.Fs), 2);
+
+%% bpm test
+fprintf("cardiac_rhythm = %d bpm\n", cardiac_rhythm(Sig1));

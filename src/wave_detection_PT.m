@@ -1,4 +1,4 @@
-function [T_locations, P_locations] = wave_detection_PT(ECG, R_locations)
+function [T_locations, P_locations] = wave_detection_PT(ECG, R_locations, plot_locations_opt)
 
     %% filtring
     ECG_G1 = filter([1 0 0 0 0 0 -1],[1],ECG);
@@ -48,27 +48,29 @@ function [T_locations, P_locations] = wave_detection_PT(ECG, R_locations)
     end
     P_locations = P_locations - 2;
     
-    figure,
-    
-    subplot(3,1,1);
-    plot(ECG);
-    hold on
-    plot(T_locations, ECG(T_locations), '.')
-    hold on
-    plot(P_locations, ECG_G1(P_locations), '.')
-    
-    subplot(3,1,2);
-    plot(ECG_G1)
-    hold on
-    plot(T_locations, ECG_G1(T_locations), '.')
-    hold on
-    plot(P_locations, ECG_G1(P_locations), '.')
-    
-    subplot(3,1,3);
-    plot(ECG_G2)
-    hold on
-    plot(T_locations, ECG_G2(T_locations), '.')
-    hold on
-    plot(P_locations, ECG_G1(P_locations), '.')
-    
+    if(strcmp(plot_locations_opt,'plot'))
+        %% Ploting steps
+        figure,
+
+        subplot(3,1,1);
+        plot(ECG);
+        hold on
+        plot(T_locations, ECG(T_locations), '.')
+        hold on
+        plot(P_locations, ECG_G1(P_locations), '.')
+
+        subplot(3,1,2);
+        plot(ECG_G1)
+        hold on
+        plot(T_locations, ECG_G1(T_locations), '.')
+        hold on
+        plot(P_locations, ECG_G1(P_locations), '.')
+
+        subplot(3,1,3);
+        plot(ECG_G2)
+        hold on
+        plot(T_locations, ECG_G2(T_locations), '.')
+        hold on
+        plot(P_locations, ECG_G1(P_locations), '.')
+    end
 end
