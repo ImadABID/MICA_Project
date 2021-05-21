@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 
-Sig1 = load("../data/ecg_normal_1.mat");
+Sig1 = load("../data/ecg_normal_3.mat");
 
 % Adapting ECG polarisation
 [maxi, max_index] = max(abs(Sig1.ecg));
@@ -28,7 +28,19 @@ window = hann(N);
 %spectro(Sig1.ecg, window,d,N_fft,Sig1.Fs, "Noramal_1");
 %spectro(Sig2.ecg, window,d,N_fft,Sig2.Fs, "VF");
 
-%[P_locs, Q_locs, R_locs, S_locs, T_locs] = wave_detection_PQRST(Sig.ecg(1:1:1200),1/(Sig.Fs), 2);
+[P_locs, Q_locs, R_locs, S_locs, T_locs] = wave_detection_PQRST(Sig1.ecg,1/(Sig1.Fs), 2,'no plot');
+
+%% ecptopic beat test
+is_ectopic_beat = ectopic_beat(Sig1);
+if(is_ectopic_beat == 1)
+    fprintf("The patient has an ectopic beat \n")
+else
+    fprintf("The patient does not have  an ectopic beat \n")
+end
+
+
+%fprintf("max eptopic value  = %d \n", max(delta_R_2));
+
 
 %% bpm test
 fprintf("cardiac_rhythm = %d bpm\n", cardiac_rhythm(Sig1));
