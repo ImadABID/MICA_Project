@@ -5,7 +5,7 @@ function bpm = cardiac_rhythm(Sig)
         delta_R(i) = R(i+1) - R(i);
     end
     
-    delta_R_moy_min = mean(delta_R) * 1/(Sig.Fs) * 1/60;
-    bpm = 1/delta_R_moy_min;
+    delta_R_moy_minute = mean(delta_R) * 1/(Sig.Fs) * 1/60;
+    bpm = 1/delta_R_moy_minute;
 end
 

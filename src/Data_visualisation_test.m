@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 
-Sig1 = load("../data/ecg_normal_1.mat");
+Sig1 = load("../data/ecg_AF.mat");
 
 % Adapting ECG polarisation
 [maxi, max_index] = max(abs(Sig1.ecg));
@@ -32,3 +32,6 @@ window = hann(N);
 
 %% bpm test
 fprintf("cardiac_rhythm = %d bpm\n", cardiac_rhythm(Sig1));
+
+%% artial_fibrillation test
+af = atrial_fibrillation(Sig1);
