@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 
-Sig1 = load("../data/ecg_normal_2.mat");
+Sig1 = load("../data/ecg_VF.mat");
 
 % Adapting ECG polarisation
 [maxi, max_index] = max(abs(Sig1.ecg));
@@ -25,10 +25,11 @@ N = window_duration * Sig1.Fs;
 d = floor(N/2);
 window = hann(N);
 
-%spectro(Sig1.ecg, window,d,N_fft,Sig1.Fs, "Noramal_1");
-%spectro(Sig2.ecg, window,d,N_fft,Sig2.Fs, "VF");
 
-[P_locs, Q_locs, R_locs, S_locs, T_locs] = wave_detection_PQRST(Sig1.ecg,1/(Sig1.Fs), 2,'no plot');
+spectro(Sig1.ecg, window,d,N_fft,Sig1.Fs, "Normal_1");
+spectro(Sig2.ecg, window,d,N_fft,Sig2.Fs, "VF");
+
+[P_locs, Q_locs, R_locs, S_locs, T_locs] = wave_detection_PQRST(Sig2.ecg(1:1:2000),1/(Sig2.Fs), 2,'no plot');
 
 %% ecptopic beat test
 is_ectopic_beat = ectopic_beat(Sig1);
@@ -52,3 +53,13 @@ if(af == 1)
 else
     fprintf("The patient hasn't an atrial fibrillation \n")
 end
+
+is_ventricular_fibrillation =  ventricular_fibrillation(Sig1);
+
+if(is_ventricular_fibrillation == 1)
+    fprintf("The patient has a ventricular fibrillation  \n")
+else
+    fprintf("The patient does not have a ventricular fibrillation \n")
+end
+
+
