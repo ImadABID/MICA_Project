@@ -13,11 +13,6 @@ N_fft = 1024;
 
 min_index = floor((time/2.5)*Sig.Fs);
 max_index = floor((time/2.5 +10 )*Sig.Fs);
-fprintf("time  : %d \n" ,time);
-fprintf("min index  : %d \n" ,min_index);
-fprintf("max index  : %d \n" ,max_index);
-fprintf("expected min index  : %d \n" ,100*Sig.Fs);
-fprintf("expected max index  : %d \n" ,110*Sig.Fs);
 
 VF_fourrier = fftshift(abs(fft(Sig.ecg(min_index:1:max_index),N_fft)));
 
