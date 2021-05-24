@@ -4,20 +4,8 @@ close all;
 
 Sig1 = load("../data/ecg_VF.mat");
 
-% Adapting ECG polarisation
-[maxi, max_index] = max(abs(Sig1.ecg));
-if Sig1.ecg(max_index) < 0
-    Sig1.ecg = -Sig1.ecg;
-end
 
 Sig2 = load("../data/ecg_VF.mat");
-
-% Adapting ECG polarisation
-[maxi, max_index] = max(abs(Sig2.ecg));
-if Sig2.ecg(max_index) < 0
-    Sig2.ecg = -Sig2.ecg;
-end
-
 
 N_fft = 1024;
 window_duration = 4; %slength(x)-1

@@ -1,5 +1,8 @@
 function [P_locations, Q_locations, R_locations, S_locations, T_locations] = wave_detection_PQRST(ECG,Ts,window_length, plot_locations_opt)
 
+%% Adapting polarisation
+ECG = Adapting_ECG_polarisation(ECG);
+
 %% Passe bas
 coeff_nume_bas = conv([1 0 0 0 0 0 -1],[1 0 0 0 0 0 -1]); %les coefficients du numérateur de la transformeé en z du filter passe_bas
 coeff_denom_bas = [1 -2 1];
