@@ -22,10 +22,10 @@ function is_atrial_fibrillation = atrial_fibrillation(Sig, plot_locations_opt)
     end
     
     %% Avoiding edge effects
-    correlation_estimation = correlation_estimation(1:1:floor(N/2));
+   % correlation_estimation = correlation_estimation(1:1:floor(N/2));
     
     %% Result
-    if(correlation_estimation(1) > 10 * mean(correlation_estimation))
+    if(0.2 * correlation_estimation(1) > max(correlation_estimation(floor(N/4):floor(N/2))))
         is_atrial_fibrillation = 1;
     else
         is_atrial_fibrillation = 0;
