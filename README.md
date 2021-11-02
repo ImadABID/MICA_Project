@@ -8,20 +8,6 @@ display ECG, in order to help clinicians through their diagnosis.
 
 This repo provides the necessary sources and informations in order to create your own GUI assistant with MATLAB.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-You need to download the ECG signals and a simple version the assistant. On a Linux or macOS distribution, open a terminal and clone the git repo with the following command : 
-
-```
-git clone https://gitlab.com/batalinux/MICA_project.git
-```
-
-On a Windows distribution, you need to download a git client (https://git-scm.com/downloads) first.
-
 ## Files
 
 ### Your Assistant
@@ -57,11 +43,12 @@ You should obtain a new window which looks like :
 This is your GUIDE editor. You can run it by doing "tools -> run" or clicking the run button. 
 It will open a new window which is your assitant !
 
-## Your turn
-
-Follow the instructions of the subject in order to enhance this assistant with a better interface and features.
-
 ## Authors
+* **Imad ABIED** (imad.abied@bordeaux-inp.fr)
+* **Mohamed AHALLI** (mohamed.ahalli@bordeaux-inp.fr)
+* **Mohamed BIGI** (mohamed.bigi@bordeaux-inp.fr)
+
+## Supervisors
 * **Nolwenn TAN** (nolwenn.tan@ihu-liryc.fr)
 * **Baptiste LAPORTE-FAURET** (baptiste.laporte-fauret@ims-bordeaux.fr)
 * **Romain TAJAN** (romain.tajan@ims-bordeaux.fr)
